@@ -1,5 +1,4 @@
 d3.csv("data/data.csv", type, function(data) {
-    console.log(data);
     //设定容器的大小及间距
     var width = 500,
         height = 300,
