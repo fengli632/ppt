@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>数据也可以这么美-浅析前端数据可视化</title>
+    <meta name="description" content="数据也可以这么美-浅析前端数据可视化">
+    <meta name="author" content="LiFeng-xjtuse">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" type="text/css" href="css/d3-contribution.css">
+    <!-- Printing and PDF exports -->
+    <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h1>数据也可以这么美</h1>
+                <h3>浅析前端数据可视化</h3>
+                <p>
+                    <!-- <small>Created by <a href="http://fengli632.github.io/">李锋</a></small> -->
+                </p>
+            </section>
+            <section>
+                <h2>数据可视化方法</h1>
+                    <p>图表库 Echarts Highcharts等</p>
+                    <p>自定义图表 D3.js</p>
+                </section>
+                
+                <section>
+                    <section>
+                        <h2>Echarts 特性</h1>
+                        <p>直观丰富多样化的图表</p>
+                        <p>丰富的交互及可视化效果</p>
+                        <p>高度个性化定制</p>
+                        <p>提供数据筛取、视图缩放、展示细节等能力</p>
+                        <aside class="notes">
+                            <p>加入了更多丰富的交互功能以及更多的可视化效果，并且对移动端做了深度的优化。</p>
+                            <p>提供了数据筛取、视图缩放、展示细节等能力</p>
+                        </aside>
+                    </section>
+                    <section>
+                        <div id="c1"></div>
+                        <div id="c2"></div>
+                        <div id="c3"></div>
+                        <div id="c4"></div>
+                    </section>
+                    <section>
+                        <div id="chart-bar"></div>
+                        <aside class="notes">
+                            <p>ECharts 3 开始不再强制使用 AMD 的方式按需引入，只需要像普通的 JavaScript 库一样用 script 标签引入。</p>
+                        </aside>
+                    </section>
+                    <section data-markdown>
+                        <script type="text/template">
+                        ## 
+                        ```
+                        <!-- 准备一个具备宽高的dom容器 -->
+                        <div id="chart-bar" style="width: 600px; height: 400px"></div>
+                        ```
+
+                        ```
+                        // 初始化一个echarts实例
+                        var chartBar = echarts.init(document.getElementById('chart-bar'));
+                        // 设定配置项
+                        var optionBar = {
+                            title: {
+                                text: "Smartisan 各型号手机销量"
+                            },
+                            //提示框
+                            tooltip: {},
+                            //图例组件展现了不同系列的标记(symbol)，颜色和名字
+                            legend: {
+                                data: ['销量']
+                            },
+                            //x轴数据
+                            xAxis: {
+                                data: ["T1", "坚果", "T2", "M1/M1L", "ODIN", "ODIN2"]
+                            },
+                            //y轴数据
+                            yAxis: {},
+                            //系列列表，每个系列通过 type 决定自己的图表类型
+                            series: [{
+                                name: '销量 （万部）',
+                                //图表类型
+                                type: 'bar',
+                                data: [25, 100, 30, 50, 250, 300]
+                            }]
+                        };
+
+                        // 设置图表实例的配置项以及数据以显示图表
+                        chartBar.setOption(optionBar);
+                        ```
+                        <aside class="notes">
+                            <p>ECharts 3 开始不再强制使用 AMD 的方式按需引入，只需要像普通的 JavaScript 库一样用 script 标签引入。</p>
+                            <p>地图数据需要额外引入相应的地图js文件，配置项加入地理坐标系组件,有需要根据相应的api进行设置即可</p>
+                            <p>提供丰富的自定义配置选项，从全局、系列、数据三个层级去设置数据图形的样式</p>
+                        </aside>
+                    </script>
+                        <!-- <div id="chart-1"></div> -->
+                    </section>
+                    <!-- <section>
+                        <div id="chart-map"></div>
+                    </section> -->
+                    
+                </section>
+                
+
+                
+
+                <section>
+                    <section>
+                        <h2>D3.js</h2>
+                        <p class="fragment">直接对 DOM 进行操作</p>
+                        <p class="fragment">拥有丰富的数学函数来处理数据转换和物理计算</p>
+                        <p class="fragment">擅长于操作 SVG 中的路径和几何图形</p>
+                        <p class="fragment">高度自由化</p>
+                        <aside class="notes">
+                            D3 有极高的灵活性，比较基础的可视化 js 库，api 和 jQuery 很像，把数据和 HTML 结构或者 SVG 文档对应起来。
+                        </aside>
+                </section>
+            
+            
+            <section>
+                <h2>实例演示-Github贡献表</h2>
+                <div class="d3-wrapper">
+                    <div class="month">
+                        <ul>
+                            <li>Jan</li>
+                            <li>Feb</li>
+                            <li>Mar</li>
+                            <li>Apr</li>
+                            <li>May</li>
+                            <li>Jun</li>
+                            <li>Jul</li>
+                            <li>Aug</li>
+                            <li>Sep</li>
+                            <li>Oct</li>
+                            <li>Nov</li>
+                            <li>Dec</li>
+                        </ul>
+                    </div>
+                    <div class="main clearfix">
+                        <div class="week">
+                            <ul>
+                                <li>Mon</li>
+                                <li>wed</li>
+                                <li>Fri</li>
+                            </ul>
+                        </div>
+                        <div id="con-chart"></div>
+                    </div>
+                    <div class="footer">
+                        <span>Less</span>
+                        <div id="desc-chart"></div>
+                        <span>More</span>
+                    </div>
+                </div>
+                <pre><code class="hljs" data-trim contenteditable>
+var dataArr = [.0, .2, .4, .6, .8];
+//设置颜色渐变阈值
+var colorMap = d3.interpolateRgb(
+    d3.rgb("#d6e685"),
+    d3.rgb("#1e6823")
+);
+//选择元素
+d3.select("#con-chart")
+    .selectAll("div")
+    .data(dataArr)
+    .enter()
+    .append("div")
+    .style("background-color", function(d) {
+        return d == .0 ? "#eee" : colorMap(d);
+    });
+                            
+                </code></pre>
+            </section>
+            <section>
+                <h2>表个白？</h2>
+                <div class="d3-wrapper love-wrapper">
+                    <div class="month">
+                        <ul>
+                            <li>Jan</li>
+                            <li>Feb</li>
+                            <li>Mar</li>
+                            <li>Apr</li>
+                            <li>May</li>
+                            <li>Jun</li>
+                            <li>Jul</li>
+                            <li>Aug</li>
+                            <li>Sep</li>
+                            <li>Oct</li>
+                            <li>Nov</li>
+                            <li>Dec</li>
+                        </ul>
+                    </div>
+                    <div class="main clearfix">
+                        <div class="week">
+                            <ul>
+                                <li>Mon</li>
+                                <li>wed</li>
+                                <li>Fri</li>
+                            </ul>
+                        </div>
+                        <div id="love-chart"></div>
+                    </div>
+                    <div class="footer">
+                        <span>Less</span>
+                        <div id="desc-chart2"></div>
+                        <span>More</span>
+                    </div>
+                </div>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ### 加入交互 
+                    ``` 
+                    //获取数据
+                    var dataLove2 = [
+                        [0, "今天...", "on Aug 4 2013"],
+                        [.1, "今天...", "on Aug 4 2014"],
+                        [.8, "今天...", "on Aug 4 2016"]
+                    ];
+                    //绘图
+                    var loveChart = d3.select("body")
+                        .selectAll("div")
+                        .data(dataLove3)
+                        .enter()
+                        .append("div")
+                        .style("background-color", function(d) {
+                            return d[0] == .0 ? "#eee" : colorMap(d[0]);
+                        });
+
+                    //添加提示框
+                    var tooltip = d3.select(".love-wrapper")
+                        .append("div")
+                        .attr("class", "d3-tooltip")
+                        .style("opacity", 0.1);
+
+
+                    loveChart.on("mouseover", function(d, i) {
+                            //通过 selection.html() 来更改提示框的文字 
+                            tooltip.html("<strong>" + d[1] + "</strong> " + d[2])
+                                .style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px")
+                                .style("opacity", 1.0);
+                        })
+                        .on("mousemove", function(d) {
+                            // 鼠标移动更改样式 left 和 top 改变提示框的位置
+                            tooltip.style("left", d3.event.pageX + "px")
+                                .style("top", d3.event.pageY + "px");
+                        })
+                        .on("mouseout", function(d) {
+                            // 鼠标移出提示框透明度设定为0
+                            tooltip.style("opacity", 0);
+                        })
+
+                    ```
+                </script>
+            </section>
+            <section>
+                <h2>D3生成图表步骤</h2>
+                <p class="fragment">先生成外部容器</p>
+                <p class="fragment">主体部分，根据实际数据生成曲线</p>
+                <p class="fragment">生成xy轴及文字标签</p>
+            </section>
+            <section>
+                <div id="d3-bar"></div>
+            </section>
+            <section data-markdown>
+                <script type="text/template">
+                    ```
+                    d3.csv("../data/data.csv", type, function(data) {
+                        console.log(data);
+                        //设定容器的大小及间距
+                        var width = 500,
+                            height = 300,
+                            margin = {left: 30, top: 30, right: 10, bottom: 30},
+                            svg_width = width + margin.left + margin.right,
+                            svg_height = height + margin.top + margin.bottom;
+
+                        //根据数据量设定缩放比例
+                        var scale = d3.scale.linear()
+                            .domain([0, d3.max(data, function(d) {
+                                return d.sale;
+                            })])
+                            .range([height, 0]);
+
+                        //设定坐标轴的定义域及值域
+                        var scale_x = d3.scale.ordinal()
+                            .domain(data.map(function(d){return d.phone;}))
+                            .rangeBands([0,width], 0.1);
+
+                        // 绘制容器
+                        var svg = d3.select("#d3-bar")
+                            .append("svg")
+                            .attr("width", svg_width)
+                            .attr("height", svg_height);
+
+                        var chart = svg.append("g")
+                            .attr("transform", "translate("+margin.left+","+margin.top+")");
+
+                        // 绘制x轴及y轴
+                        var x_axis = d3.svg.axis().scale(scale_x);
+                        y_axis = d3.svg.axis().scale(scale).orient("left");
+
+                        chart.append("g")
+                            .call(x_axis)
+                            .attr("transform", "translate(0,"+height+")");
+
+                        chart.append("g")
+                            .call(y_axis);
+
+                        // 绘制主题部分
+                        var bar = chart.selectAll(".bar")
+                            .data(data)
+                            .enter()
+                            .append("g")
+                            .attr("class", "bar")
+                            .attr("transform", function(d, i) {
+                                return "translate(" + scale_x(d.phone) + ",0)"
+                            });
+
+                        //添加矩形
+
+                        bar.append("rect")
+                            .attr({
+                                "y": function(d) {
+                                    return scale(d.sale)
+                                },
+                                "width": scale_x.rangeBand(),
+                                "height": function(d) {
+                                    return height - scale(d.sale)
+                                }
+                            })
+                            .style("fill", "#c23531");
+
+                        // 添加文本
+                        bar.append("text")
+                            .attr({
+                                "y": function(d) {
+                                    return scale(d.sale);
+                                },
+                                "x": scale_x.rangeBand() / 2,
+                                "dy": 15,
+                                "text-anchor": "middle"
+                            }).text(function(d) {
+                            return d.phone;
+                        });
+
+                    });
+
+                    function type(d) {
+                        d.sale = +d.sale;
+                        return d;
+                    }
+                    ```
+                </script>
+            </section>
+            </section>
+            <section>
+                <h2>其他方面</h2>
+                <ul>
+                    <li>兼容性</li>
+                    <li>移动端表现</li>
+                    <li>加载速度</li>
+                </ul>
+            </section>
+            <section>
+                <h1>Thanks</h1>
+            </section>
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/echarts-china.js"></script>
+    <script src="js/echarts-mymap.js"></script>
+    <script src="js/echarts-mycharts.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <script src="js/d3-contribution.js"></script>
+    <script src="js/echarts-friends.js"></script>
+    <script src="js/d3-bar.js"></script>
+    <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        mouseWheel: true,
+
+        //transition: Reveal.getQueryHash().transition || 'default', // none/fade/slide/convex/concave/zoom
+
+        transition: 'slide',
+
+        // Optional reveal.js plugins
+        dependencies: [{
+            src: 'lib/js/classList.js',
+            condition: function() {
+                return !document.body.classList;
+            }
+        }, {
+            src: 'plugin/markdown/marked.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            condition: function() {
+                return !!document.querySelector('pre code');
+            },
+            callback: function() {
+                hljs.initHighlightingOnLoad();
+            }
+        }, {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true
+        }]
+    });
+    </script>
+    <!-- <script src="js/mycharts.js"></script> -->
+</body>
+
+</html>

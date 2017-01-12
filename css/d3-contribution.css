@@ -1,0 +1,129 @@
+html,
+body,
+ul {
+    padding: 0;
+    margin: 0;
+    /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
+}
+body {
+    position: relative;
+}
+
+section .d3-wrapper {
+    width: 830px;
+    height: 200px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #333;
+    background: #fff;
+    position: relative;
+    padding: 24px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    position: relative;
+}
+
+.d3-wrapper .main {}
+
+.d3-wrapper .month {
+    margin: 0 0 10px 10px;
+}
+
+.d3-wrapper .month ul {
+    list-style: none;
+    overflow: hidden;
+}
+
+.d3-wrapper .month ul li {
+    float: left;
+    margin: 0 20px;
+}
+
+.d3-wrapper .week {
+    float: left;
+}
+
+.d3-wrapper .week ul {
+    list-style: none;
+    overflow: hidden;
+}
+
+.d3-wrapper .week ul li {
+    margin: 13px 0;
+}
+
+.d3-wrapper #con-chart,
+.d3-wrapper #love-chart {
+    float: left;
+    margin: 0 0 0 10px;
+    width: 730px;
+}
+
+.d3-wrapper #con-chart div,
+.d3-wrapper #love-chart div,
+.d3-wrapper #desc-chart div,
+.d3-wrapper #desc-chart2 div {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 4px;
+}
+
+.d3-wrapper .clearfix:after {
+    content: " ";
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+}
+
+.d3-wrapper .footer {
+    position: absolute;
+    right: 44px;
+    bottom: 20px;
+}
+
+.d3-wrapper .footer #desc-chart,
+.d3-wrapper .footer #desc-chart2 {
+    display: inline-block;
+}
+
+
+/*提示框*/
+
+ .d3-tooltip {
+    position: absolute;
+    z-index: 999;
+    padding: 10px;
+    font-size: 14px;
+    color: #bbb;
+    text-align: center;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 3px;
+    /*margin: -48px 0 0 -85px;*/
+    transform: translate(-50%, -140%);
+    -webkit-transform: -webkit-translate(-50%, -140%);
+}
+
+.d3-tooltip strong {
+    color: #ddd;
+    font-weight: 500;
+}
+
+.d3-tooltip:after {
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    box-sizing: border-box;
+    margin: 0 0 0 -5px;
+    content: " ";
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, .8);
+}
+
+

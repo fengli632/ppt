@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ECharts-demo </title>
+    <style type="text/css">
+    #chart-bar,
+    #chart-pie {
+        width: 600px;
+        height: 400px;
+        
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 准备一个具备宽高的dom容器 -->
+    <div id="chart-bar"></div>
+    <div id="chart-pie"></div>
+    <script src="js/echarts.min.js"></script>
+    <script>
+    // 初始化一个echarts实例
+    var chartBar = echarts.init(document.getElementById('chart-bar'));
+    // 配置项
+    var optionBar = {
+        title: {
+            text: "Smartisan 各型号手机销量"
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["T1", "坚果", "M1", "M1L", "ODIN", "ODIN2"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量 /万台',
+            type: 'bar',
+            data: [25, 100, 30, 10, 250, 300]
+        }]
+    };
+    // 设置图表实例的配置项以及数据以显示图表
+    chartBar.setOption(optionBar);
+
+    //饼图
+    var chartPie = echarts.init(document.getElementById('chart-pie'));
+
+    var optionPie = ({
+        // 背景颜色
+        backgroundColor: '#2c343c',
+
+        // 全局文本样式
+        textStyle: {
+            color: 'rgba(255, 255, 255, 0.3)'
+        },
+        visualMap: {
+            // 不显示 visualMap 组件，只用于明暗度的映射
+            show: false,
+            // 映射的最小值为 80
+            min: 80,
+            // 映射的最大值为 600
+            max: 600,
+            inRange: {
+                // 明暗度的范围是 0 到 1
+                colorLightness: [0, 1]
+            }
+        },
+
+        // 系列数据
+        series: [{
+            name: '坚果七色',
+            type: 'pie',
+
+            // 是否展示成南丁格尔图，通过半径区分数据大小
+            // roseType: 'angle',
+            radus: '55%',
+
+            data: [{
+                value: 400,
+                name: '红',
+                itemStyle: {
+                    normal: {
+                        color: '#eb7d85'
+                    }
+                }
+            }, {
+                value: 335,
+                name: '橙',
+                itemStyle: {
+                    normal: {
+                        color: '#feb566'
+                    }
+                }
+            }, {
+                value: 310,
+                name: '黄',
+                itemStyle: {
+                    normal: {
+                        color: '#fcde5c'
+                    }
+                }
+            }, {
+                value: 274,
+                name: '绿',
+                itemStyle: {
+                    normal: {
+                        color: '#d5ed73'
+                    }
+                }
+            }, {
+                value: 235,
+                name: '青',
+                itemStyle: {
+                    normal: {
+                        color: '#caf0f6'
+                    }
+                }
+            }, {
+                value: 235,
+                name: '蓝',
+                itemStyle: {
+                    normal: {
+                        color: '#bac8fc'
+                    }
+                }
+            }, {
+                value: 235,
+                name: '紫',
+                itemStyle: {
+                    normal: {
+                        color: '#dcadec'
+                    }
+                }
+            }],
+            // 图形样式，有 normal 和 emphasis 两个状态。normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式
+            //每个扇形颜色也可以通过分别设置 data 下的数据项实现。
+            // itemStyle: {
+            //     normal: {
+            //         color: '#c23531',
+            //         //阴影样式设置
+            //         shadowBlur: 200,
+            //         shadowColor: 'rgba(0, 0, 0, 0.9)'
+            //     },
+            //     emphasis: {
+            //         shadowBlur: 200,
+            //         shadowColor: 'rgba(0, 0, 0, 0.9)'
+            //     }
+            // },
+            // 文本
+            label: {
+                normal: {
+                    textStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                    }
+                }
+            },
+            // 标签的视觉引导线
+            labelLine: {
+                normal: {
+                    lineStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                    }
+                }
+            }
+
+
+        }]
+    })
+   
+    chartPie.setOption(optionPie);
+    </script>
+</body>
+
+</html>
