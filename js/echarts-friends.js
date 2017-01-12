@@ -333,7 +333,7 @@ var chart3 = echarts.init(document.getElementById('c3'));
 
                 formatter:function(params){
                     // return params.value[3] + "<br />时间："+params.value[4] + '<br />地点：' +params.value[5];
-                    console.log(params.color);
+                    // console.log(params.color);
                     var index = params.seriesIndex;
                     var t1 = params.data.title + "<br/>成立时间："+
                              params.data.time + "<br />人数：" + 
@@ -449,7 +449,7 @@ var chart3 = echarts.init(document.getElementById('c3'));
                     data: convertData3(data3),
                     symbol: 'pin',
                     symbolSize: function (val) {
-                        console.log(val[2]);
+                        // console.log(val[2]);
                         return val[2] / 10;
                     },
                     label: {
